@@ -17,10 +17,17 @@ module.exports = function(grunt) {
     shell: {
       open: {
         command: 'open ./build/releases/<%= pkg.name %>/mac/<%= pkg.name %>.app'
+      },
+      compile: {
+        command: 'coffee -o ./src/js -c ./src/coffee'
+      },
+      debug: {
+        command: '`find . -name node-webkit | sed -n 1p` ./src'
       }
     }
   });
   grunt.loadNpmTasks('grunt-node-webkit-builder');
   grunt.loadNpmTasks('grunt-shell');
-  grunt.registerTask('default', ['nodewebkit','shell']);
+  grunt.registerTask('default', ['shell:debug']);
+  grunt.registerTask('package', ['nodewebkit','shell:compile','shell:open']);
 };

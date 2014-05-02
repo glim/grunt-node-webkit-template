@@ -1,28 +1,42 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" ng-app="myApp">
 <head>
-<title>Hello World from grunt-node-webkit-builder!</title>
-<script>
-    var deck = require('deck');
-    var xs = deck.shuffle([ 1, 2, 3, 4 ]);
-    console.log(deck, xs);
-</script>
+  <meta charset="utf-8">
+  <script>
+    var gui = require('nw.gui');
+    (function(){
+      function toTitleCase(str)
+      {
+          return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+      }
+      document.write("<title>" + toTitleCase(gui.App.manifest.name) + "</title>");  
+    })();
+  </script>
+  <link rel="stylesheet" href="css/app.css"/>
+  <link rel="stylesheet" href="lib/bootstrap-3.1.1-dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="lib/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css"/>
+  <link rel="stylesheet" href="lib/font-awesome-4.0.3/css/font-awesome.min.css"/>
 </head>
 <body>
-<h1>Hello World!</h1>
-We are using node.js <script>document.write(process.version)</script>
+  
+  <ul class="menu">
+    <li><a href="#/view1">view1</a></li>
+    <li><a href="#/view2">view2</a></li>
+  </ul>
+  <div ng-view></div>
+  <div>
+    Angular seed app: v<span app-version></span>
+  </div>
 
-<h2>Here is a required node_module</h2>
-<ul>
-<script>
-
-    for (var counter=0; counter<xs.length; counter++) {
-       document.write("<li>" + xs[counter] + "</li>");
-    }
-</script>
-</ul>
-
-<h2>And here is a cute kitten:</h2>
-<img src="images/kitten.jpg">
+  <!--Javascript files -->
+  <script src="lib/jquery-1.11.0.min.js"></script>
+  <script src="lib/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+  <script src="lib/angular-1.3.0-beta.7/angular.js"></script>
+  <script src="lib/angular-1.3.0-beta.7/angular-route.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
 </body>
 </html>
